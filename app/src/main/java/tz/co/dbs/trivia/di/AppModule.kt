@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import tz.co.dbs.trivia.network.QuestionApi
+import tz.co.dbs.trivia.repository.QuestionRepository
 import tz.co.dbs.trivia.util.Constants
 import javax.inject.Singleton
 
@@ -22,5 +23,11 @@ object AppModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(QuestionApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideQuestionRepository(api: QuestionApi): QuestionRepository {
+        return QuestionRepository(api)
     }
 }
