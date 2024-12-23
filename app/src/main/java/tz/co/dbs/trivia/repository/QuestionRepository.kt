@@ -16,6 +16,7 @@ class QuestionRepository @Inject constructor(private val api: QuestionApi) {
         dataOrException.loading = true
         try {
             dataOrException.data = api.getQuestions()
+            Log.d(TAG, "getQuestions: ${dataOrException.data?.size}")
         } catch (e: Exception) {
             dataOrException.exception = e
             Log.d(TAG, "getQuestions: ${e.message}")
@@ -24,5 +25,4 @@ class QuestionRepository @Inject constructor(private val api: QuestionApi) {
         }
         return dataOrException
     }
-
 }
