@@ -13,14 +13,14 @@ class QuestionRepository @Inject constructor(private val api: QuestionApi) {
     private val dataOrException = DataOrException<List<Question>, Boolean, Exception>()
 
     suspend fun getQuestions(): DataOrException<List<Question>, Boolean, Exception> {
-        dataOrException.isLoading = true
+        dataOrException.loading = true
         try {
             dataOrException.data = api.getQuestions()
         } catch (e: Exception) {
             dataOrException.exception = e
             Log.d(TAG, "getQuestions: ${e.message}")
         } finally {
-            dataOrException.isLoading = false
+            dataOrException.loading = false
         }
         return dataOrException
     }
